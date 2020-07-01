@@ -37,9 +37,9 @@ const person = {
   role: Role.ADMIN
 }
 
-
-let favoriteActivities: string[]
-favoriteActivities = ['Sports']
+// any型は基本避けるべき
+let favoriteActivities: any[]
+favoriteActivities = ['Sports', 5]
 console.log(person.name)
 
 for (const hobby of person.hobbies){
