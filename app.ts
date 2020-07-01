@@ -1,52 +1,15 @@
-// const person: {
-//   name: string
-//   age: number
-// } 
-// const person:{
-//   name: string
-//   age:number
-//   hobbies: string[]
-//   // Tuple
-//   role: [number, string]
-// } = {
-//   name: 'yota',
-//   age:30,
-//   hobbies: ['Sports', 'Cooking'],
-//   role:[2, 'auther']
-// }
-
-
-// person.role.push('admin')
-// ※TypeScriptでpushはチェックされない
-
-// チェックされる
-// person.role[1] = 10
-// person.role = [0, 'admin', 'user']
-
-// const ADMIN = 0
-// const READ_ONLY = 1
-// const AUTEHR = 2
-
-enum Role {
-  ADMIN, READ_ONLY, AUTHOR
+function combine(input1: number | string, input2: number | string) {
+  let result
+  if (typeof input1 === 'number' && typeof input2 === 'number'){
+    result = input1 + input2
+  } else {
+    result = input1.toString() + input2.toString()
+  }
+  
+  return result
 }
-const person = {
-  name: 'yota',
-  age:30,
-  hobbies: ['Sports', 'Cooking'],
-  role: Role.ADMIN
-}
+const combinedAges = combine(30, 26)
+console.log(combinedAges)
 
-// any型は基本避けるべき
-let favoriteActivities: any[]
-favoriteActivities = ['Sports', 5]
-console.log(person.name)
-
-for (const hobby of person.hobbies){
-  console.log(hobby.toUpperCase())
-  // console.log(hobby.map)
-}
-
-if(person.role === Role.ADMIN){
-  console.log("管理者ユーザ")
-}
+const combinedName = combine('Max', 'Annna')
+console.log(combinedName)
