@@ -1,52 +1,26 @@
-// const person: {
-//   name: string
-//   age: number
-// } 
-// const person:{
-//   name: string
-//   age:number
-//   hobbies: string[]
-//   // Tuple
-//   role: [number, string]
-// } = {
-//   name: 'yota',
-//   age:30,
-//   hobbies: ['Sports', 'Cooking'],
-//   role:[2, 'auther']
-// }
+function combine(input1: number | string, input2: number | string, resultConversion:'as-number' | 'as-string') {
+  let result
+  if (
+    (typeof input1 === 'number' && typeof input2 === 'number') ||
+    resultConversion =='as-number'
+  ) {
+    result = +input1 + +input2
+  } else {
+    result = input1.toString() + input2.toString()
+  }
 
-
-// person.role.push('admin')
-// ※TypeScriptでpushはチェックされない
-
-// チェックされる
-// person.role[1] = 10
-// person.role = [0, 'admin', 'user']
-
-// const ADMIN = 0
-// const READ_ONLY = 1
-// const AUTEHR = 2
-
-enum Role {
-  ADMIN, READ_ONLY, AUTHOR
+  return result
+  // if (resultConversion === 'as-number') {
+  //   return +result
+  // } else {
+  //   return result.toString
+  // }
 }
-const person = {
-  name: 'yota',
-  age:30,
-  hobbies: ['Sports', 'Cooking'],
-  role: Role.ADMIN
-}
+const combinedAges = combine(30, 26, 'as-number')
+console.log(combinedAges)
 
-// any型は基本避けるべき
-let favoriteActivities: any[]
-favoriteActivities = ['Sports', 5]
-console.log(person.name)
+const combinedSringAges = combine('30', '26', 'as-number')
+console.log(combinedSringAges)
 
-for (const hobby of person.hobbies){
-  console.log(hobby.toUpperCase())
-  // console.log(hobby.map)
-}
-
-if(person.role === Role.ADMIN){
-  console.log("管理者ユーザ")
-}
+const combinedName = combine('Max', 'Annna', 'as-string')
+console.log(combinedName)
