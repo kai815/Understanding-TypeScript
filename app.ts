@@ -9,3 +9,11 @@ if(typeof userInput === 'string'){
 }
 //anyだとエラーにならないがunknownだとなるunkownは型チェックは行う
 // userName = userInput
+
+//"絶対"に値を返すことはない
+function generateError(message: string, code: number): never {
+  throw { message: message, errorCode: code }
+}
+
+const result = generateError('エラーが発生しました', 500)
+console.log(result)
