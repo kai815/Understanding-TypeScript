@@ -65,5 +65,12 @@
     /* Advanced Options */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
-  }
+  },
+  //コンパイルの対象外にする
+  "exclude": ["node_modules"], // デフォルトで除外されている
+
+  //includeに指定されたファイルのみをコンパイルの対象にする
+  // "include": ["app.ts"],
+  //ファイルごとにコンパイルするファイルを指定（ワイルドカードは使用不可）
+  // "files" :[]
 }
