@@ -1,2 +1,5 @@
-const user = "ooo"
-console.log(user)
+const button = document.querySelector("button")!
+
+button.addEventListener('click', () => {
+  console.log('Click')
+})
