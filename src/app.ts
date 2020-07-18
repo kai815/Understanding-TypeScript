@@ -15,14 +15,14 @@ age = 29
 //   return result
 // }
 
-const add = (a: number, b: number = 1) => a+b
+// const add = (a: number, b: number = 1) => a+b
 
-const printOutput:(output: string | number) => void = output => {
-  console.log(output)
-}
+// const printOutput:(output: string | number) => void = output => {
+//   console.log(output)
+// }
 
-// console.log(add(2,1))
-printOutput(add(2))
+// // console.log(add(2,1))
+// printOutput(add(2))
 
 const button = document.querySelector('button')
 if(button){
@@ -47,3 +47,12 @@ const person = {
 const copiedPerson = {
   ...person
 }
+
+const add = (...numbers: number[]) => {
+  return numbers.reduce((curResult, curValue)=>{
+    return curResult + curValue
+  }, 0)
+}
+
+const addedNumbers = add(1,2,3,4,5)
+console.log(addedNumbers)
