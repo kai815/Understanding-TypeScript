@@ -1,9 +1,9 @@
 const userName = "Max"
 // userName = 'Mas'
 
-let age = 30
+// let age = 30
 
-age = 29
+// age = 29
 
 // varは関数スコープがグローバルスコープ
 // let,constはブロックスコープ
@@ -40,7 +40,7 @@ activeHobbies.push(...hobbies)
 
 
 const person = {
-  name:'Max',
+  firstName:'Max',
   age: 30
 }
 
@@ -56,3 +56,12 @@ const add = (...numbers: number[]) => {
 
 const addedNumbers = add(1,2,3,4,5)
 console.log(addedNumbers)
+
+const [hobby1, hobby2, ...remainingHobbies] = hobbies
+console.log(hobbies, hobby1, hobby2)
+
+const {
+  firstName, age
+} = person
+
+console.log(firstName, age)
