@@ -4,6 +4,7 @@ class Department {
   private employess: string[] = []
 
   //これを書くだけでプロパティがセットされる
+  //readonlyで変更できなくする。コードの意図の明確化にも
   constructor(private readonly id: string, public name: string) {
     // this.id = id
     // this.name = n
