@@ -3,6 +3,7 @@ class Department {
   // name: string;
   private employess: string[] = []
 
+  //これを書くだけでプロパティがセットされる
   constructor(private id: string, public name: string) {
     // this.id = id
     // this.name = n
