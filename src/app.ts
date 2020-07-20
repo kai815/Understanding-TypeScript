@@ -4,7 +4,7 @@ class Department {
   private employess: string[] = []
 
   //これを書くだけでプロパティがセットされる
-  constructor(private id: string, public name: string) {
+  constructor(private readonly id: string, public name: string) {
     // this.id = id
     // this.name = n
   }
