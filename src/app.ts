@@ -1,14 +1,17 @@
 class Department {
-  name: string;
+  // private: id,
+  // name: string;
   private employess: string[] = []
 
-  constructor(n: string) {
-    this.name = n
+  //これを書くだけでプロパティがセットされる
+  constructor(private id: string, public name: string) {
+    // this.id = id
+    // this.name = n
   }
 
   //ダミーのパラメータをいれることで型の安全性を高める
   describe(this: Department){
-    console.log('Department: ' + this.name)
+    console.log(`Department: ${this.id} :${this.name}`)
   }
   addEmployee(employee: string) {
     // validation etc
@@ -21,7 +24,7 @@ class Department {
   }
 }
 
-const accounting = new Department("Accounting")
+const accounting = new Department("d1", "Accounting")
 
 accounting.addEmployee('Max')
 accounting.addEmployee('Tom')
