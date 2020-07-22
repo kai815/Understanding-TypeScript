@@ -25,18 +25,46 @@ class Department {
   }
 }
 
-const accounting = new Department("d1", "Accounting")
+class ITDepartment extends Department {
+  admins: string[]
+  constructor(id: string, admins: string[]) {
+    //ベースクラスのconstructorを呼び出す
+    super(id, 'IT')
+    this.admins = admins
+  }
+}
 
-accounting.addEmployee('Max')
-accounting.addEmployee('Tom')
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    //ベースクラスのconstructorを呼び出す
+    super(id, 'IT')
+  }
+
+  addReports(text: string){
+    this.reports.push(text)
+  }
+
+  printReports(){
+    console.log(this.reports)
+  }
+}
+
+const it = new ITDepartment("d1", ["Max"])
+
+it.addEmployee('Max')
+it.addEmployee('Tom')
 
 //下記のように追加されてしまうのは問題
 // (例：addEmployeeにvalidation記述してたらスルーされる)
 // accounting.employess[2] = 'Anna'
 
-accounting.describe()
-accounting.printEmployeeInformation()
+it.describe()
+it.printEmployeeInformation()
+console.log(it)
 
+const accounting = new AccountingDepartment('d2', [])
+accounting.addReports("Something")
+accounting.printReports()
 // const accountingCopy = { 
 //   name: "COPY",
 //   describe: accounting.describe 
