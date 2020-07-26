@@ -1,8 +1,11 @@
 class Department {
+  static fiscalYear = 2020
   // private: id,
   // name: string;
   protected employess: string[] = []
-
+  static createEmloyee(name: string){
+    return { name: name }
+  }
   //これを書くだけでプロパティがセットされる
   //readonlyで変更できなくする。コードの意図の明確化にも
   constructor(private readonly id: string, public name: string) {
@@ -72,6 +75,9 @@ class AccountingDepartment extends Department {
     this.employess.push(employee)
   }
 }
+
+const employee1 = Department.createEmloyee('テスト')
+console.log(employee1, Department.fiscalYear)
 
 const it = new ITDepartment("d1", ["Max"])
 
