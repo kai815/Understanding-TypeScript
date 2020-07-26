@@ -1,7 +1,7 @@
 class Department {
   // private: id,
   // name: string;
-  private employess: string[] = []
+  protected employess: string[] = []
 
   //これを書くだけでプロパティがセットされる
   //readonlyで変更できなくする。コードの意図の明確化にも
@@ -47,6 +47,13 @@ class AccountingDepartment extends Department {
   printReports(){
     console.log(this.reports)
   }
+
+  addEmployee(employee: string){
+    if(employee ==="Max"){
+      return
+    }
+    this.employess.push(employee)
+  }
 }
 
 const it = new ITDepartment("d1", ["Max"])
@@ -65,6 +72,10 @@ console.log(it)
 const accounting = new AccountingDepartment('d2', [])
 accounting.addReports("Something")
 accounting.printReports()
+
+accounting.addEmployee('太郎')
+accounting.addEmployee('Max')
+accounting.printEmployeeInformation()
 // const accountingCopy = { 
 //   name: "COPY",
 //   describe: accounting.describe 
