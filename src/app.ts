@@ -1,4 +1,5 @@
-class Department {
+abstract class Department {
+//abstractクラスはインスタンス化できない（サブクラスはできる）
   static fiscalYear = 2020
   // private: id,
   // name: string;
@@ -8,15 +9,18 @@ class Department {
   }
   //これを書くだけでプロパティがセットされる
   //readonlyで変更できなくする。コードの意図の明確化にも
-  constructor(private readonly id: string, public name: string) {
+  constructor(readonly id: string, public name: string) {
     // this.id = id
     // this.name = n
   }
 
-  //ダミーのパラメータをいれることで型の安全性を高める
-  describe(this: Department){
-    console.log(`Department: ${this.id} :${this.name}`)
-  }
+  // //ダミーのパラメータをいれることで型の安全性を高める
+  // describe(this: Department){
+  //   console.log(`Department: ${this.id} :${this.name}`)
+  // }
+  // 抽象メソッドにすることでサブクラスで中身を実装することを強制
+  abstract describe(this: Department): void
+
   addEmployee(employee: string) {
     // validation etc
     this.employess.push(employee)
@@ -34,6 +38,9 @@ class ITDepartment extends Department {
     //ベースクラスのconstructorを呼び出す
     super(id, 'IT')
     this.admins = admins
+  }
+  describe () {
+    console.log("IT部門-ID:"+ this.id)
   }
 }
 
@@ -74,6 +81,9 @@ class AccountingDepartment extends Department {
     }
     this.employess.push(employee)
   }
+  describe () {
+    console.log("会見部門-ID:" + this.id)
+  }
 }
 
 const employee1 = Department.createEmloyee('テスト')
@@ -100,11 +110,12 @@ accounting.mostRecentReport = "テストのレポート"
 // console.log(accounting.mostRecentReport)
 accounting.addReports("Something")
 console.log(accounting.mostRecentReport)
-accounting.printReports()
+// accounting.printReports()
 
 accounting.addEmployee('太郎')
 accounting.addEmployee('Max')
-accounting.printEmployeeInformation()
+// accounting.printEmployeeInformation()
+accounting.describe()
 // const accountingCopy = { 
 //   name: "COPY",
 //   describe: accounting.describe 
