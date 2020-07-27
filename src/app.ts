@@ -46,6 +46,7 @@ class ITDepartment extends Department {
 
 class AccountingDepartment extends Department {
   private lastReport: string
+  private static instance: AccountingDepartment
 
   get mostRecentReport(){
     if(this.lastReport){
@@ -60,10 +61,19 @@ class AccountingDepartment extends Department {
     }
     this.addReports(value)
   }
-  constructor(id: string, private reports: string[]) {
+
+  private constructor(id: string, private reports: string[]) {
     //ベースクラスのconstructorを呼び出す
     super(id, 'IT')
     this.lastReport = reports[0]
+  }
+
+  static getInstance(){
+    if (this.instance) {
+      return this.instance
+    }
+    this.instance = new AccountingDepartment('d2', [])
+    return this.instance
   }
 
   addReports(text: string){
@@ -102,7 +112,11 @@ it.describe()
 it.printEmployeeInformation()
 console.log(it)
 
-const accounting = new AccountingDepartment('d2', [])
+// インスタンス化を一度しかできないようにした(シングルトンパターンと言うらしい)
+const accounting = AccountingDepartment.getInstance()
+const accounting2 = AccountingDepartment.getInstance()
+console.log(accounting)
+console.log(accounting2)
 
 // accounting.mostRecentReport = ""
 accounting.mostRecentReport = "テストのレポート"
