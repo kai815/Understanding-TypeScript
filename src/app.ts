@@ -1,4 +1,5 @@
-class Department {
+abstract class Department {
+//abstractクラスはインスタンス化できない（サブクラスはできる）
   static fiscalYear = 2020
   // private: id,
   // name: string;
@@ -8,15 +9,18 @@ class Department {
   }
   //これを書くだけでプロパティがセットされる
   //readonlyで変更できなくする。コードの意図の明確化にも
-  constructor(private readonly id: string, public name: string) {
+  constructor(readonly id: string, public name: string) {
     // this.id = id
     // this.name = n
   }
 
-  //ダミーのパラメータをいれることで型の安全性を高める
-  describe(this: Department){
-    console.log(`Department: ${this.id} :${this.name}`)
-  }
+  // //ダミーのパラメータをいれることで型の安全性を高める
+  // describe(this: Department){
+  //   console.log(`Department: ${this.id} :${this.name}`)
+  // }
+  // 抽象メソッドにすることでサブクラスで中身を実装することを強制
+  abstract describe(this: Department): void
+
   addEmployee(employee: string) {
     // validation etc
     this.employess.push(employee)
@@ -35,10 +39,14 @@ class ITDepartment extends Department {
     super(id, 'IT')
     this.admins = admins
   }
+  describe () {
+    console.log("IT部門-ID:"+ this.id)
+  }
 }
 
 class AccountingDepartment extends Department {
   private lastReport: string
+  private static instance: AccountingDepartment
 
   get mostRecentReport(){
     if(this.lastReport){
@@ -53,10 +61,19 @@ class AccountingDepartment extends Department {
     }
     this.addReports(value)
   }
-  constructor(id: string, private reports: string[]) {
+
+  private constructor(id: string, private reports: string[]) {
     //ベースクラスのconstructorを呼び出す
     super(id, 'IT')
     this.lastReport = reports[0]
+  }
+
+  static getInstance(){
+    if (this.instance) {
+      return this.instance
+    }
+    this.instance = new AccountingDepartment('d2', [])
+    return this.instance
   }
 
   addReports(text: string){
@@ -73,6 +90,9 @@ class AccountingDepartment extends Department {
       return
     }
     this.employess.push(employee)
+  }
+  describe () {
+    console.log("会見部門-ID:" + this.id)
   }
 }
 
@@ -92,7 +112,11 @@ it.describe()
 it.printEmployeeInformation()
 console.log(it)
 
-const accounting = new AccountingDepartment('d2', [])
+// インスタンス化を一度しかできないようにした(シングルトンパターンと言うらしい)
+const accounting = AccountingDepartment.getInstance()
+const accounting2 = AccountingDepartment.getInstance()
+console.log(accounting)
+console.log(accounting2)
 
 // accounting.mostRecentReport = ""
 accounting.mostRecentReport = "テストのレポート"
@@ -100,11 +124,12 @@ accounting.mostRecentReport = "テストのレポート"
 // console.log(accounting.mostRecentReport)
 accounting.addReports("Something")
 console.log(accounting.mostRecentReport)
-accounting.printReports()
+// accounting.printReports()
 
 accounting.addEmployee('太郎')
 accounting.addEmployee('Max')
-accounting.printEmployeeInformation()
+// accounting.printEmployeeInformation()
+accounting.describe()
 // const accountingCopy = { 
 //   name: "COPY",
 //   describe: accounting.describe 
