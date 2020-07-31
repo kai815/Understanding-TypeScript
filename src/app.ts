@@ -1,5 +1,5 @@
 interface Greatable {
-  name: string
+  readonly name: string
   // age: number
 
   greet(phrase: string) : void
@@ -32,6 +32,7 @@ class Person implements Greatable {
 let user1: Greatable
 
 user1 = new Person('Max')
+// user1.name = "太郎"
 
 user1.greet("ハロー")
 console.log(user1)
