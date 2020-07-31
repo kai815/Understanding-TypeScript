@@ -1,9 +1,11 @@
-interface Greatable {
+interface Named {
   readonly name: string
-  // age: number
+} 
 
+interface Greatable extends Named{
   greet(phrase: string) : void
 }
+
 //インターフェイスはオブジェクト型のみに使える
 //複数のクラスに使用可能
 
@@ -16,6 +18,7 @@ interface Greatable {
 // }
 
 // クラスにインターフェイスは複数使える
+// extends なしでこうやってもかけるclass Person implements Greatable, Named
 class Person implements Greatable {
   name: string
   age = 30
