@@ -109,3 +109,22 @@ function moveAnimal(animal: Animal){
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 10})
+
+//HTMLParagraphElement(かnull)まで型推論してくれる
+// const paragraph = document.querySelector('p')
+
+// HTMLElement(かnull)までの型推論
+// TSはHTMLの解析まではできない
+const paragraph = document.getElementById('message-output')
+
+// 型キャストの1つめのやりかた !はnullじゃないことを明示
+// const userInputElement = <HTMLInputElement>document.getElementById("user-input")!
+
+// 型キャストの2つめのやりかた
+// const userInputElement = document.getElementById("user-input") as HTMLInputElement
+
+const userInputElement = document.getElementById("user-input")
+
+if(userInputElement){
+  (userInputElement as HTMLInputElement).value = "こんにちわ"
+}
