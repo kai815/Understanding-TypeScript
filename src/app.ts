@@ -123,8 +123,23 @@ const paragraph = document.getElementById('message-output')
 // 型キャストの2つめのやりかた
 // const userInputElement = document.getElementById("user-input") as HTMLInputElement
 
+
 const userInputElement = document.getElementById("user-input")
 
 if(userInputElement){
   (userInputElement as HTMLInputElement).value = "こんにちわ"
+}
+
+interface ErrorContainer{
+  // {email:"正しいEメールではありません",username:"記号を含めることはできません"}
+  // id: string
+  // プロパティの肩を定義
+  [prop:string]: string
+}
+
+const errorBag: ErrorContainer = {
+  email: "正しいメールアドレスではありません",
+  // email: 1
+  // 文字列に変換される
+  // 1: "正しいメールアドレスではありません"
 }
