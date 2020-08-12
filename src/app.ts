@@ -47,6 +47,21 @@ const result = add("Hello", 'TypeScript')
 //関数オーバーロードがもう1つの方法
 result.split(' ')
 
+//バックエンドからデータを取得したと仮定
+const fetchedUserData = {
+  id: 'u1',
+  name: 'user1',
+  job: {
+    title: 'Developer',
+    description: 'TypeScript'
+  }
+}
+
+//「?」で存在すればの意味になる
+console.log(fetchedUserData?.job?.title)
+// jsだと下記のようにになる
+// console.log(fetchedUserData.job && fetchedUserData.job.title)
+
 // type UnknownEmployee = Employee | Admin
 
 // function printEmployeeInfomation(emp: UnknownEmployee){
