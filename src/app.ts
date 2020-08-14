@@ -62,6 +62,14 @@ console.log(fetchedUserData?.job?.title)
 // jsだと下記のようにになる
 // console.log(fetchedUserData.job && fetchedUserData.job.title)
 
+const userInput = ""
+
+//""空文字の時もDEFAULTになる
+// const storeData = userInput || 'DEFAULT'
+const storeData = userInput ?? 'DEFAULT'
+
+console.log(storeData)
+
 // type UnknownEmployee = Employee | Admin
 
 // function printEmployeeInfomation(emp: UnknownEmployee){
