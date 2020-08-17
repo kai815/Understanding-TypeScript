@@ -30,7 +30,8 @@
 // }
 
 //異なる型(TとU)を渡すことを明示している
-function merge<T, U>(objA: T, objB: U){
+//extendsで制約を付けられる
+function merge<T extends object, U extends object>(objA: T, objB: U){
   return Object.assign(objA, objB)
 }
 
@@ -40,4 +41,4 @@ const megedObj = merge({name: 'MAX', hobbies:['Sports']}, {age: 30})
 //object型としてしか認識されない型キャストを使用する手もあるが面倒
 // const megedObj = merge({name: 'MAX'}, {age: 30})　as {name:string, age:number}
 
-console.log(megedObj.age)
+console.log(megedObj)
