@@ -59,3 +59,9 @@ function countAndDescribe<T extends Lengthy>(element: T):[T, string]{
 }
 
 console.log(countAndDescribe(['sports','cooking']))
+
+//keyofでobjectのkeyであることを制約
+function extractAndConver<T extends object, U extends keyof T>(obj: T, key: U){
+  return 'Value' + obj[key]
+}
+console.log(extractAndConver({ name: 'Max' }, "name"))
