@@ -42,3 +42,20 @@ const megedObj = merge({name: 'MAX', hobbies:['Sports']}, {age: 30})
 // const megedObj = merge({name: 'MAX'}, {age: 30})　as {name:string, age:number}
 
 console.log(megedObj)
+
+//lengthプロパティがあることを定義
+interface Lengthy {
+  length: number
+}
+
+//Generic型に制約
+function countAndDescribe<T extends Lengthy>(element: T):[T, string]{
+  let describeText = '値がありません。'
+  // elementにlengthがあるかわからないのでエラーになるのでinterface
+  if(element.length > 0 ){
+    describeText = '値は'+ element.length + '個です。'
+  }
+  return [element, describeText]
+}
+
+console.log(countAndDescribe(['sports','cooking']))
