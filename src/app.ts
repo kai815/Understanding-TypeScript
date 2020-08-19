@@ -65,3 +65,44 @@ function extractAndConver<T extends object, U extends keyof T>(obj: T, key: U){
   return 'Value' + obj[key]
 }
 console.log(extractAndConver({ name: 'Max' }, "name"))
+
+//プリミティブ型のみを扱えるようにしてobjectは別のclassを作った方がよい
+class Datastorage<T extends string | number | boolean> {
+  private data: T[] = []
+
+  addItem(item: T){
+    this.data.push(item)
+  }
+
+  removeItem(item: T){
+    
+    if(this.data.indexOf(item) === -1){
+      return
+    }
+    //プリミティブ型(string,number)だと問題なく動くが参照型(object)だと正しく動かない
+    //indexOfは見つからない時に-1(配列の最後)を返す
+    this.data.splice(this.data.indexOf(item), 1)
+  }
+
+  getItems(){
+    return [...this.data]
+  }
+}
+
+const textStorage = new Datastorage<string>()
+textStorage.addItem("Data1")
+textStorage.addItem("Data2")
+textStorage.addItem("Data3")
+textStorage.removeItem("Data3")
+console.log(textStorage)
+
+const numberStorage = new Datastorage<number>()
+
+// const objStorage = new Datastorage<object>()
+// const obj = { name: 'Max'}
+// // objStorage.addItem({name: 'Max'})
+// objStorage.addItem(obj)
+// objStorage.addItem({name: 'Manu'})
+// // objStorage.removeItem({name: 'Max'})
+// objStorage.removeItem(obj)
+// console.log(objStorage)
