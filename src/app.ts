@@ -106,3 +106,28 @@ const numberStorage = new Datastorage<number>()
 // // objStorage.removeItem({name: 'Max'})
 // objStorage.removeItem(obj)
 // console.log(objStorage)
+
+interface CourseGoal {
+  title: string
+  description: string
+  completeUnti: Date
+}
+
+function createCoureseGoal(title: string, description: string, date: Date): CourseGoal{
+  // return {
+  //   title: title,
+  //   description: description,
+  //   completeUnti: date
+  // }
+  //直接Objectを定義できない時 Partialを使う
+  let courseGoal: Partial<CourseGoal> = {}
+  courseGoal.title = title
+  courseGoal.description = description
+  courseGoal.completeUnti = date
+  return courseGoal as CourseGoal
+}
+
+const names: Readonly<string[]> = ["Max", "Anna"]
+//エラーになる
+//names.push("pp")
+//names.pop()
