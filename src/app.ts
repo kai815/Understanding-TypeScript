@@ -67,6 +67,7 @@ function extractAndConver<T extends object, U extends keyof T>(obj: T, key: U){
 console.log(extractAndConver({ name: 'Max' }, "name"))
 
 //プリミティブ型のみを扱えるようにしてobjectは別のclassを作った方がよい
+//genericはクラスの中で1つの型に固定したいときに向いている（関数でも同じ）
 class Datastorage<T extends string | number | boolean> {
   private data: T[] = []
 
@@ -88,6 +89,19 @@ class Datastorage<T extends string | number | boolean> {
     return [...this.data]
   }
 }
+
+// union型は呼び出すたびにその型のいずれかを受け入れるという場合に向いている
+// class Datastorage {
+//   //ミックスされた配列になる
+//   // private data: (string | numbe | boolean)[] = []
+//   // どれか1つのデータ型の配列にする
+//   private data: string[] | number[] | boolean[] = []
+
+//   //どの型でも入れられる
+//   addItem(item:string | number | boolean){
+//     this.data.push(item)
+//   }
+// }
 
 const textStorage = new Datastorage<string>()
 textStorage.addItem("Data1")
