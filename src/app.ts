@@ -1,11 +1,15 @@
 //デコレーターは大文字から始まることが多い
 //デコレーターはクラスが定義された時に実行される
-function Logger(constructor: Function){
-  console.log("ログ出力中・・・・")
-  console.log(constructor)
+function Logger(logString: string){
+  //実行される関数を返す
+  return function(constructor: Function){
+    console.log(logString)
+    console.log(constructor)
+  }
 }
 //デコレータを識別
-@Logger
+//引数を渡せる
+@Logger("ログ出力中 - PERSON")
 class Person {
   name = 'Max'
 
