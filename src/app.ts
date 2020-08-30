@@ -42,6 +42,8 @@ const person = new Person()
 console.log(person)
 
 // ---
+//デコレータはクラスの定義時に実行される
+
 function Log(target: any, propertyName: string | Symbol){
   console.log("Property デコレータ")
   console.log(target, propertyName)
@@ -90,3 +92,6 @@ class Product{
     return this._price * (1 + tax)
   }
 }
+
+const p1 = new Product('book1', 100)
+const p2 = new Product('book2', 200)
