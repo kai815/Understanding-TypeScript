@@ -13,13 +13,21 @@ function WithTemplate(template: string, hookId: string){
   console.log("TEMPLATE ファクトリ")
   //_で引数を認識しているけど使わない
   // return function(_: Function){
-  return function(constructor: any){
-    console.log("テンプレートを表示")
-    const hookEl = document.getElementById(hookId)
-    const p = new constructor()
-    if(hookEl){
-      hookEl.innerHTML = template
-      hookEl.querySelector("h1")!.textContent = p.name
+  return function<T extends {new(...args: any[]): { name: string }}>(originalConstructor: T){
+    //新しいconstructor関数に置き換える
+    //クラスをインスタンス化された時に実行
+    return class extends originalConstructor {
+      //_で引数を認識しているけど使わない
+      constructor(..._args: any[]){
+        super() //オリジナルのコンストラクタ関数の実行
+        //追加
+        console.log("テンプレートを表示")
+        const hookEl = document.getElementById(hookId)
+        if(hookEl){
+          hookEl.innerHTML = template
+          hookEl.querySelector("h1")!.textContent = this.name
+        }
+      }
     }
   }
 }
