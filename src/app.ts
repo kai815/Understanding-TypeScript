@@ -61,6 +61,8 @@ function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log(target)
   console.log(name)
   console.log(descriptor)
+  // 戻り値にPropertyDescriptorを指定して
+  // return することでPropertyDescripterを変更できる
 }
 function Log3(target: any, name: string | Symbol, descriptor: PropertyDescriptor){
   console.log("Method デコレータ")
@@ -103,3 +105,30 @@ class Product{
 
 const p1 = new Product('book1', 100)
 const p2 = new Product('book2', 200)
+
+function Autobind(_target: any, _methodName: string, descriptor: PropertyDescriptor){
+  const originalMethod = descriptor.value
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get(){
+      const boundFn = originalMethod.bind(this)
+      return boundFn
+    }
+  }
+  return adjDescriptor
+}
+
+class Printer {
+  message = 'クリックしました！'
+
+  @Autobind
+  showMessage(){
+    console.log(this.message)
+  }
+}
+const p = new Printer()
+
+const button = document.querySelector("button")!
+button.addEventListener('click', p.showMessage)
+// button.addEventListener('click', p.showMessage.bind(p))
