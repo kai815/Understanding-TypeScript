@@ -62,6 +62,43 @@ function Autobind(
   return adjDescriptor;
 }
 
+// ProjectList class
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLElement;
+
+  constructor(private type: "active" | "finished") {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.templateElement = document.getElementById(
+      "project-list"
+    )! as HTMLTemplateElement;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as HTMLElement;
+    this.element.id = `${this.type}-projects`;
+    this.attach();
+    this.renderContent();
+  }
+
+  private renderContent() {
+    const listId = `${this.type}-projects-list`;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.element.querySelector("ul")!.id = listId;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.element.querySelector("h2")!.textContent =
+      this.type === "active" ? "実行中プロジェクト" : "完了プロジェクト";
+  }
+
+  private attach() {
+    this.hostElement.insertAdjacentElement("beforeend", this.element);
+  }
+}
+
 // ProjectInput class
 class ProjectInput {
   templateElement: HTMLTemplateElement;
@@ -159,3 +196,7 @@ class ProjectInput {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const projectInput = new ProjectInput();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const activePrjList = new ProjectList("active");
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const finishedPrjList = new ProjectList("finished");
