@@ -165,6 +165,14 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
 // ProjectItem Class
 class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
   private project: Project;
+
+  get manday() {
+    if (this.project.manday < 20) {
+      return this.project.manday.toString() + "人日";
+    } else {
+      return (this.project.manday / 20).toString() + "人月";
+    }
+  }
   constructor(hostId: string, project: Project) {
     super("single-project", hostId, false, project.id);
     this.project = project;
@@ -178,9 +186,7 @@ class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.element.querySelector("h2")!.textContent = this.project.title;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.element.querySelector(
-      "h3"
-    )!.textContent = this.project.manday.toString();
+    this.element.querySelector("h3")!.textContent = this.manday; //this.mandayでgetter関数が実行される
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.element.querySelector("p")!.textContent = this.project.description;
   }
