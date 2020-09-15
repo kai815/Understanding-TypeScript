@@ -217,7 +217,9 @@ class ProjectItem
   }
 }
 // ProjectList class
-class ProjectList extends Component<HTMLDivElement, HTMLElement> {
+class ProjectList
+  extends Component<HTMLDivElement, HTMLElement>
+  implements DragTarget {
   assignedProjects: Project[];
 
   constructor(private type: "active" | "finished") {
@@ -226,8 +228,24 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
     this.configure();
     this.renderContent();
   }
+  @Autobind
+  dragOverHandler(_: DragEvent) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.add("droppable");
+  }
+  dropHandler(_: DragEvent) {}
+  @Autobind
+  dragLeaveHandler(_: DragEvent) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
+  }
   //public methodはprivate methodより上に書く
   configure() {
+    this.element.addEventListener("dragover", this.dragOverHandler);
+    this.element.addEventListener("drop", this.dropHandler);
+    this.element.addEventListener("dragleave", this.dragLeaveHandler);
     projectState.addListener((projects: Project[]) => {
       const relevantProjects = projects.filter((prj) => {
         if (this.type === "active") {
