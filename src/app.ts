@@ -195,8 +195,9 @@ class ProjectItem
   }
 
   @Autobind
-  dragStartHandler(_event: DragEvent) {
-    console.log("Drag Start");
+  dragStartHandler(event: DragEvent) {
+    event.dataTransfer!.setData("text/plain", this.project.id);
+    event.dataTransfer!.effectAllowed = "move";
   }
   @Autobind
   dragEndHandler(_event: DragEvent) {
@@ -229,12 +230,18 @@ class ProjectList
     this.renderContent();
   }
   @Autobind
-  dragOverHandler(_: DragEvent) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const listEl = this.element.querySelector("ul")!;
-    listEl.classList.add("droppable");
+  dragOverHandler(event: DragEvent) {
+    if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+      event.preventDefault();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const listEl = this.element.querySelector("ul")!;
+      listEl.classList.add("droppable");
+    }
   }
-  dropHandler(_: DragEvent) {}
+  dropHandler(event: DragEvent) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    console.log(event.dataTransfer!.getData("text/plain"));
+  }
   @Autobind
   dragLeaveHandler(_: DragEvent) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
