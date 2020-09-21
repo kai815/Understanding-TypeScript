@@ -1,9 +1,7 @@
-// トリプルスラッシュはTSの特別な命令
-/// <reference path="components/project-input.ts" />
-/// <reference path="components/project-list.ts" />
+//ブラウザでimportをする時は.js必要 webpackなどを使う時は拡張子不要
+import { ProjectInput } from "./components/project-input.js";
+import { ProjectList } from "./components/project-list.js";
 
-namespace App {
-  new ProjectInput();
-  new ProjectList("active");
-  new ProjectList("finished");
-}
+new ProjectInput();
+new ProjectList("active");
+new ProjectList("finished");
