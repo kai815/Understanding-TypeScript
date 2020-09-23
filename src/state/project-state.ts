@@ -53,4 +53,6 @@ export class ProjectState extends State<Project> {
   }
 }
 
+console.log("実行中・・・・")
+
 export const projectState = ProjectState.getInstance();
