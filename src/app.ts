@@ -5,6 +5,8 @@ import { ProjectList } from "./components/project-list";
 import _ from 'lodash';
 
 console.log(_.shuffle([1,2,3]))
+declare var GLOBAL:string
+console.log(GLOBAL)
 new ProjectInput();
 new ProjectList("active");
 new ProjectList("finished");
