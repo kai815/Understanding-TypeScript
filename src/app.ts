@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 //ブラウザでimportをする時は.js必要 webpackなどを使う時は拡張子不要
 import { ProjectInput } from "./components/project-input";
 import { ProjectList } from "./components/project-list";
@@ -11,6 +12,15 @@ const products = [
   {title:'商品1', price:100},
   {title:'商品2', price:200}
 ]
+const newProd = new Product('', -100)
+validate(newProd).then(errors =>{
+  if(errors.length > 0){
+    console.log("バリデーションエラー！！")
+    console.log(errors)
+  }else{
+    console.log(newProd.getInformation)
+  }
+})
 const loadedProducts = plainToClass(Product, products)
 // const loadedProducts = products.map(product =>{
 //   return new Product(product.title, product.price)
