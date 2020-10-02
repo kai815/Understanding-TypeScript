@@ -1,6 +1,7 @@
 import React from 'react';
 
-function App() {
+//ReatのFunction Componentの型を定義
+const App: React.FC = () => {
   return (
     <div className="App">
       <p>Hello React!</p>
