@@ -19,7 +19,6 @@ const App: React.FC = () => {
   }
   return (
     <div className="App">
-      <h1>Hello React!</h1>
       <NewTodo onAddTodo={todoAddHandler}/>
       <TodoList items={todos} onRemoveTodo={todoRemoveHandler}></TodoList>
     </div>
