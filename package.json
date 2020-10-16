@@ -14,6 +14,7 @@
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
+    "@types/googlemaps": "^3.40.0",
     "dotenv-webpack": "^3.0.0",
     "ts-loader": "^7.0.3",
     "typescript": "^3.8.3",
